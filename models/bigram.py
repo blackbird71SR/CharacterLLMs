@@ -10,9 +10,9 @@ def createWordsMapping(filename = 'names.txt'):
   stoi['.'] = 0
   itos = {i:s for s,i in stoi.items()}
   numChars = len(stoi)
-  return words, numChars, stoi, itos
+  return words, stoi, itos, numChars
 
-def createFreqMapping(words, numChars, stoi):
+def createFreqMapping(words, stoi, numChars):
   N = torch.zeros((numChars, numChars), dtype=torch.int32)
   for w in words:
     chs = ['.'] + list(w) + ['.']
@@ -20,4 +20,20 @@ def createFreqMapping(words, numChars, stoi):
       ix1 = stoi[ch1]
       ix2 = stoi[ch2]
       N[ix1][ix2] = N[ix1][ix2] + 1
-  return N  
+  return N
+
+def plotFreqMapping(N, itos, numChars):
+  plt.figure(figsize=(16, 16))
+  plt.imshow(N, cmap='Blues')
+
+  for i in range(numChars):
+    for j in range(numChars):
+      chstr = itos[i] + itos[j]
+      plt.text(j, i, chstr, ha='center', va='bottom', color='gray')
+      plt.text(j, i, N[i, j].item(), ha='center', va='top', color='gray')
+  plt.axis('off')
+
+if __name__ == '__main__':
+  words, stoi, itos, numChars = createWordsMapping()
+  N = createFreqMapping(words, stoi, numChars)
+  plotFreqMapping(N, itos, numChars)
