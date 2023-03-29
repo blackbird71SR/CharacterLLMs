@@ -33,7 +33,75 @@ def plotFreqMapping(N, itos, numChars):
       plt.text(j, i, N[i, j].item(), ha='center', va='top', color='gray')
   plt.axis('off')
 
+def createProbMatrix(N, isSmooth=True):
+  if isSmooth:
+    P = (N+1).float() # to avoid division by zero
+  else:
+    P = N.float()
+  P /= P.sum(dim=1, keepdim=True)
+  return P
+
+def generateExample(P, g, itos):
+  out = []
+  ix = 0
+  while True:
+    p = P[ix]
+    ix = torch.multinomial(p, num_samples=1, replacement=True, generator=g).item()
+    out.append(itos[ix])
+    if ix == 0:
+      break
+  return ''.join(out)
+
+def generateExamples(P, itos, numExamples=10):
+  g = torch.Generator().manual_seed(2147483647)
+  examples = []
+  for i in range(numExamples):
+    example = generateExample(P, g, itos)
+    examples.append(example)
+  return examples
+
+def loss(examples, showLogs = False):
+  log_likelihood = 0.0
+  n = 0
+
+  for word in examples:
+    if showLogs:
+      print(f'Word: {word}')
+    chs = ['.'] + list(word) + ['.']
+    for ch1, ch2 in zip(chs, chs[1:]):
+      ix1 = stoi[ch1]
+      ix2 = stoi[ch2]
+      prob = P[ix1][ix2]
+      logprob = torch.log(prob)
+      log_likelihood += logprob
+      n += 1
+      if showLogs:
+        print(f'{ch1}{ch2}: {prob=:.4f} {logprob=:.4f}')
+    
+  nll = - log_likelihood # negative log likelihood
+  normalized_nll = nll/n
+
+  if showLogs:
+    print(f'{log_likelihood=}')
+    print(f'{nll=}')
+    print(f'{normalized_nll=}')
+  
+  return normalized_nll
+    
+
 if __name__ == '__main__':
   words, stoi, itos, numChars = createWordsMapping()
   N = createFreqMapping(words, stoi, numChars)
   plotFreqMapping(N, itos, numChars)
+  P = createProbMatrix(N)
+  examples = generateExamples(P, itos)
+  
+  train_loss = loss(words)
+  test_loss = loss(examples)
+
+  print(f'Generated Examples: {examples}')
+  print(f'Training Loss: {train_loss}')
+  print(f'Testing Loss: {test_loss}')
+  
+  loss(['josh'], showLogs=True)
+  loss(['abcdjq'], showLogs=True)
