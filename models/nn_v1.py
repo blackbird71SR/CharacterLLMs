@@ -29,7 +29,7 @@ def initalizeWeights(numChars):
   W = torch.randn((numChars, numChars), generator=g, requires_grad=True)
   return W  
 
-def trainModel(xs, W, numChars, epochs):
+def trainModel(xs, ys, W, numChars, epochs):
   for k in range(epochs):
     # Forward Pass
     xenc = F.one_hot(xs, num_classes=numChars).float() # Input to the network
@@ -84,7 +84,7 @@ if __name__ == '__main__':
   xs, ys = createTrainingData(words)
   
   W = initalizeWeights(numChars)
-  trainedW = trainModel(xs, W, numChars, epochs=20)
+  trainedW = trainModel(xs, ys, W, numChars, epochs=20)
   
   examples = generateExamples(trainedW, itos, numChars)
 
