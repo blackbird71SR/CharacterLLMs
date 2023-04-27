@@ -51,6 +51,15 @@ class BatchNorm1d:
   def parameters(self):
     return [self.gamma, self.beta]
 
+class Tanh:
+
+  def __call__(self, x):
+    self.out = torch.tanh(x)
+    return self.out
+
+  def parameters(self):
+    return []
+
 def createWordsMapping(filename = 'names.txt'):
   words = open(filename, 'r').read().splitlines()
   chars = sorted(list(set(''.join(words))))
