@@ -95,6 +95,31 @@ def buildDatasets(words, block_size):
 
   return Xtr, Ytr, Xdev, Ydev, Xte, Yte
 
+def initializeModelWeights(n_vocab, block_size, n_embed, n_hidden):
+  C = torch.randn((n_vocab, n_embed), generator=g)
+
+  layers = [
+    Linear(n_embed * block_size, n_hidden), BatchNorm1d(n_hidden), Tanh(),
+    Linear(n_hidden, n_hidden), BatchNorm1d(n_hidden), Tanh(),
+    Linear(n_hidden, n_hidden), BatchNorm1d(n_hidden), Tanh(),
+    Linear(n_hidden, n_hidden), BatchNorm1d(n_hidden), Tanh(),
+    Linear(n_hidden, n_hidden), BatchNorm1d(n_hidden), Tanh(),
+    Linear(n_hidden, n_vocab), BatchNorm1d(n_vocab)
+  ]
+
+  with torch.no_grad():
+    layers[-1].gamma *= 0.1 # Make last layer less confident
+    for layer in layers[:-1]:
+      if isinstance(layer, Linear):
+        layer.weight *= 5/3
+
+  parameters = [C] + [p for layer in layers for p in layer.parameters()]
+  for p in parameters:
+    p.requires_grad = True
+  
+  print(f'Total Parameters: {sum(p.nelement() for p in parameters)}')
+  return layers, parameters
+
 if __name__ == '__main__':
   BLOCK_SIZE = 3
   N_EMBED = 10
@@ -105,3 +130,4 @@ if __name__ == '__main__':
 
   words, stoi, itos, n_vocab = createWordsMapping()
   Xtr, Ytr, Xdev, Ydev, Xte, Yte = buildDatasets(words, BLOCK_SIZE)
+  layers, parameters = initializeModelWeights(n_vocab, BLOCK_SIZE, N_EMBED, BATCH_SIZE)
