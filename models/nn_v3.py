@@ -160,7 +160,9 @@ def loss(X, Y, layers, parameters):
   emb = parameters[0][X]
   x = emb.view(emb.shape[0], -1)
   for layer in layers:
-    x = layer(x)
+      if isinstance(layer, BatchNorm1d):
+        layer.training = False
+      x = layer(x)
   loss = F.cross_entropy(x, Y)
   return loss
 
