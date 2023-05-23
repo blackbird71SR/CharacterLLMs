@@ -164,6 +164,20 @@ def initializeWeights(n_vocab, block_size, n_embed, n_hidden):
   print(f'Total Parameters: {sum(p.nelement() for p in parameters)}')
   return model
 
+def trainModel(X, Y, model, n_epochs, batch_size):
+  lossi = []
+  ud = []
+  parameters = model.parameters()
+  
+  for epoch in range(n_epochs):
+    
+    # Minibatch construct
+    ix = torch.randint(0, X.shape[0], (batch_size,), generator=g)
+    X_batch, Y_batch = X[ix], Y[ix]
+  
+  return lossi, ud, parameters
+  
+
 if __name__ == '__main__':
   BLOCK_SIZE = 8
   N_EMBED = 24
