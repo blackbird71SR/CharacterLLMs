@@ -174,9 +174,60 @@ def trainModel(X, Y, model, n_epochs, batch_size):
     # Minibatch construct
     ix = torch.randint(0, X.shape[0], (batch_size,), generator=g)
     X_batch, Y_batch = X[ix], Y[ix]
-  
+
+    # Forward Pass
+    logits = model(X_batch)
+    loss = F.cross_entropy(logits, Y_batch)
+
+    # Backward Pass
+    for p in parameters:
+      p.grad = None
+    loss.backward()
+
+    # Update Parameters
+    lr = 0.1 if epoch < 100000 else 0.01 # stop learning rate decay
+    for p in parameters:
+      p.data += -lr * p.grad
+
+    # Track Stats
+    lossi.append(loss.log10().item())
+    with torch.no_grad():
+      ud.append([(lr * p.grad.std()/p.data.std()).log10().item() for p in parameters])
+    if epoch % 10000 == 0:
+      print(f'{epoch:7d}/{n_epochs:7d}: {loss.item():.4f}')
+    
+  plt.plot(torch.tensor(lossi).view(-1, 1000).mean(1))
   return lossi, ud, parameters
-  
+
+@torch.no_grad()
+def loss(X, Y, model):
+  for layer in model.layers:
+    layer.training = False
+  logits = model(X)
+  loss = F.cross_entropy(logits, Y)
+  return loss
+
+def generateExample(model, block_size, itos):
+  out = []
+  context = [0] * block_size
+  while True:
+    logits = model(torch.tensor([context]))
+    probs = F.softmax(logits, dim=1)
+    ix = torch.multinomial(probs, num_samples=1, generator=g).item()
+    context = context[1:] + [ix]
+    out.append(ix)
+    if ix == 0:
+      break
+  return ''.join(itos[i] for i in out)
+
+def generateExamples(model, block_size, itos, numExamples = 20):
+  for layer in model.layers:
+    layer.training = False
+  examples = []
+  for _ in range(numExamples):
+    example = generateExample(model, block_size, itos)
+    examples.append(example)
+  return examples
 
 if __name__ == '__main__':
   BLOCK_SIZE = 8
@@ -189,3 +240,10 @@ if __name__ == '__main__':
   words, stoi, itos, n_vocab = createWordsMapping()
   Xtr, Ytr, Xdev, Ydev, Xte, Yte = buildDatasets(words, BLOCK_SIZE)
   model = initializeWeights(n_vocab, BLOCK_SIZE, N_EMBED, N_HIDDEN)
+  lossi, ud, parameters = trainModel(Xtr, Ytr, model, N_EPOCHS, BATCH_SIZE)
+
+  print(f'Train Loss: {loss(Xtr, Ytr, model)}')
+  print(f'Val Loss: {loss(Xdev, Ydev, model)}')
+
+  examples = generateExamples(model, BLOCK_SIZE, itos)
+  print(f'Generated Examples: {examples}')

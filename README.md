@@ -108,3 +108,30 @@ Train Loss: 2.010877847671509
 Val Loss: 2.0822041034698486
 Generated Examples: ['tiavo.', 'deya.', 'brie.', 'araice.', 'isha.', 'roancayse.', 'emreidra.', 'hani.', 'tyleib.', 'chetcalyn.', 'kwistamarin.', 'mara.', 'sole.', 'diottari.', 'lacereaemi.', 'mico.', 'caymona.', 'zaki.', 'leonta.', 'pepp.']
 ```
+4. [Neural Network Model - v4](models/nn_v4.py)
+```
+Total Parameters: 76579
+      0/ 200000: 3.3089
+  10000/ 200000: 1.8268
+  20000/ 200000: 1.7980
+  30000/ 200000: 1.9491
+  40000/ 200000: 2.0487
+  50000/ 200000: 2.0088
+  60000/ 200000: 2.2462
+  70000/ 200000: 1.6711
+  80000/ 200000: 1.6818
+  90000/ 200000: 2.3227
+ 100000/ 200000: 2.2765
+ 110000/ 200000: 1.4424
+ 120000/ 200000: 1.6375
+ 130000/ 200000: 2.1063
+ 140000/ 200000: 1.7828
+ 150000/ 200000: 1.9999
+ 160000/ 200000: 1.7877
+ 170000/ 200000: 1.6707
+ 180000/ 200000: 2.6358
+ 190000/ 200000: 1.4886
+Train Loss: 1.7871284484863281
+Val Loss: 1.9913774728775024
+Generated Examples: ['dalyn.', 'ahnia.', 'sofer.', 'jubson.', 'jannie.', 'joss.', 'chanthin.', 'gerapton.', 'mariyael.', 'terry.', 'zyyan.', 'muzyah.', 'suirlyn.', 'branson.', 'reiner.', 'azan.', 'zyann.', 'kasnon.', 'flona.', 'ahavari.']
+```
