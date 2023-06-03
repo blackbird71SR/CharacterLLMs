@@ -13,11 +13,30 @@ eval_iters = 200
 
 torch.manual_seed(1337)
 
-def read_data(filename):
+def readData(filename):
   with open(filename, 'r', encoding='utf-8') as f:
     text = f.read()
     return text
   
+def createVocab(text):
+  chars = sorted(list(set(text)))
+  vocab_size = len(chars)
+  return chars, vocab_size
+
+def createCharMapping(chars):
+  stoi = {ch:i for i,ch in enumerate(chars)}
+  itos = {i:ch for i,ch in enumerate(chars)}
+  encode = lambda s: [stoi[c] for c in s]
+  decode = lambda l: ''.join([itos[i] for i in l])
+  return encode, decode
+
+def encodeData(text, encode):
+  data = torch.tensor(encode(text), dtype=torch.long)
+  return data
+  
 if __name__ == '__main__':
-  text = read_data('input.txt')
-  print(text[:100])
+  text = readData('input.txt')
+  chars, vocab_size = createVocab(text)
+  encode, decode = createCharMapping(chars)
+  data = encodeData(text, encode)
+  print(data[:100])
