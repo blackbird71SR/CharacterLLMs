@@ -33,10 +33,24 @@ def createCharMapping(chars):
 def encodeData(text, encode):
   data = torch.tensor(encode(text), dtype=torch.long)
   return data
+
+def trainValSplit(data, train_ratio = 0.9):
+  n = int(train_ratio * len(data))
+  train_data = data[:n]
+  val_data = data[n:]
+  return train_data, val_data
+
+def getBatch(data):
+  ix = torch.randint(len(data) - block_size, (batch_size, ))
+  x = torch.stack([data[i:i+block_size] for i in ix]) # shape: ()
+  y = torch.stack([data[i+1:i+block_size+1] for i in ix])
+  return x,y
   
 if __name__ == '__main__':
   text = readData('input.txt')
   chars, vocab_size = createVocab(text)
   encode, decode = createCharMapping(chars)
   data = encodeData(text, encode)
-  print(data[:100])
+  train_data, val_data = trainValSplit(data)
+  xb, yb = getBatch(train_data)
+  print(xb.shape, yb.shape)
