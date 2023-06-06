@@ -45,6 +45,12 @@ def getBatch(data):
   x = torch.stack([data[i:i+block_size] for i in ix]) # shape: ()
   y = torch.stack([data[i+1:i+block_size+1] for i in ix])
   return x,y
+
+class BigramLM(nn.Module):
+  
+  def __init__(self, vocab_size):
+    super().__init__()
+    self.token_embedding_table = nn.Embedding(vocab_size, vocab_size)
   
 if __name__ == '__main__':
   text = readData('input.txt')
