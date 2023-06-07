@@ -51,6 +51,21 @@ class BigramLM(nn.Module):
   def __init__(self, vocab_size):
     super().__init__()
     self.token_embedding_table = nn.Embedding(vocab_size, vocab_size)
+
+  def forward(self, idx, targets=None):
+    logits = self.token_embedding_table(idx)
+    print("Inital Logits Shape:", logits.shape)
+    if targets is None:
+      loss = None
+    else:
+      B,T,C = logits.shape
+      logits = logits.view(B*T, C)
+      targets = targets.view(B*T)
+      print("Final Logits Shape:", logits.shape)
+      print("Final Targets Shape:", targets.shape)
+      print(logits[0], targets[0])
+      loss = F.cross_entropy(logits, targets)
+    return logits, loss
   
 if __name__ == '__main__':
   text = readData('input.txt')
@@ -58,5 +73,9 @@ if __name__ == '__main__':
   encode, decode = createCharMapping(chars)
   data = encodeData(text, encode)
   train_data, val_data = trainValSplit(data)
+  
   xb, yb = getBatch(train_data)
   print(xb.shape, yb.shape)
+  m = BigramLM(vocab_size)
+  logits, loss = m(xb, yb)
+  print("Loss:", loss.item())
