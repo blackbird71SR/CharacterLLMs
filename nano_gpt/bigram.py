@@ -54,18 +54,25 @@ class BigramLM(nn.Module):
 
   def forward(self, idx, targets=None):
     logits = self.token_embedding_table(idx)
-    print("Inital Logits Shape:", logits.shape)
     if targets is None:
       loss = None
     else:
       B,T,C = logits.shape
       logits = logits.view(B*T, C)
       targets = targets.view(B*T)
-      print("Final Logits Shape:", logits.shape)
-      print("Final Targets Shape:", targets.shape)
-      print(logits[0], targets[0])
       loss = F.cross_entropy(logits, targets)
     return logits, loss
+  
+  def generate(self, idx, max_new_toekns):
+    # idx is (B,T) array of indices in the current context
+    for _ in range(max_new_toekns):
+      logits, loss = self(idx) # get predictions
+      logits = logits[:,-1,:] # focus only on last time step, becomes (B,C)
+      probs = F.softmax(logits, dim=1) # (B,C)
+      idx_next = torch.multinomial(probs, num_samples=1) # (B,1)
+      idx = torch.cat((idx, idx_next), dim=1) # (B,T+1)
+    return idx
+
   
 if __name__ == '__main__':
   text = readData('input.txt')
@@ -75,7 +82,7 @@ if __name__ == '__main__':
   train_data, val_data = trainValSplit(data)
   
   xb, yb = getBatch(train_data)
-  print(xb.shape, yb.shape)
   m = BigramLM(vocab_size)
   logits, loss = m(xb, yb)
-  print("Loss:", loss.item())
+  idx = torch.zeros((1,1), dtype=torch.long)
+  print(decode(m.generate(idx, max_new_toekns=400)[0].tolist()))
