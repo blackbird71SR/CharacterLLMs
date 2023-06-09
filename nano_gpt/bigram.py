@@ -72,6 +72,21 @@ class BigramLM(nn.Module):
       idx_next = torch.multinomial(probs, num_samples=1) # (B,1)
       idx = torch.cat((idx, idx_next), dim=1) # (B,T+1)
     return idx
+  
+  def generate_text(self, max_new_toekns=400):
+    idx = torch.zeros((1, 1), dtype=torch.long)
+    result_idx = self.generate(idx, max_new_toekns)
+    return decode(result_idx[0].tolist())
+  
+  def train(self, data):
+    self.optimizer = torch.optim.Adam(self.parameters(), lr=1e-3)
+    for step in range(max_iters):
+      xb, yb = getBatch(data)
+      logits, loss = self.forward(xb, yb)
+      self.optimizer.zero_grad(set_to_none=True)
+      loss.backward()
+      self.optimizer.step()
+      if step % 1000 == 0: print(loss.item())
 
   
 if __name__ == '__main__':
@@ -84,5 +99,8 @@ if __name__ == '__main__':
   xb, yb = getBatch(train_data)
   m = BigramLM(vocab_size)
   logits, loss = m(xb, yb)
-  idx = torch.zeros((1,1), dtype=torch.long)
-  print(decode(m.generate(idx, max_new_toekns=400)[0].tolist()))
+  print("---BEFORE TRAIN ---")
+  print(m.generate_text(max_new_toekns=400))
+  m.train(train_data)
+  print("---AFTER TRAIN ---")
+  print(m.generate_text(max_new_toekns=400))
