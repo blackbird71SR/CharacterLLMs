@@ -6,7 +6,7 @@ import torch.nn.functional as F
 batch_size = 32 # independent sequences to process in parallel
 block_size = 8  # maximum context length for predictions
 max_iters = 10000
-eval_interval = 300
+eval_interval = 1000
 learning_rate = 1e-2
 device = "cuda" if torch.cuda.is_available() else "cpu"
 eval_iters = 200
@@ -47,6 +47,7 @@ def getBatch(data):
   x, y = x.to(device), y.to(device)
   return x,y
 
+
 class BigramLM(nn.Module):
   
   def __init__(self, vocab_size):
@@ -64,6 +65,24 @@ class BigramLM(nn.Module):
       loss = F.cross_entropy(logits, targets)
     return logits, loss
   
+  @torch.no_grad()
+  def estimate_loss(self, train_data, val_data):
+    out = {}
+    dataDict = {
+      'train': train_data,
+      'val': val_data
+    }
+    self.eval()
+    for split in dataDict.keys():
+      losses = torch.zeros(eval_iters)
+      for k in range(eval_iters):
+        x, y = getBatch(dataDict[split])
+        logits, loss = self.forward(x, y)
+        losses[k] = loss.item()
+      out[split] = losses.mean()
+    self.train()
+    return out
+  
   def generate(self, idx, max_new_toekns):
     # idx is (B,T) array of indices in the current context
     for _ in range(max_new_toekns):
@@ -79,15 +98,17 @@ class BigramLM(nn.Module):
     result_idx = self.generate(idx, max_new_toekns)
     return decode(result_idx[0].tolist())
   
-  def train(self, data):
+  def trainModel(self, train_data, val_data):
     self.optimizer = torch.optim.Adam(self.parameters(), lr=1e-3)
-    for step in range(max_iters):
-      xb, yb = getBatch(data)
+    for iter in range(max_iters):
+      xb, yb = getBatch(train_data)
       logits, loss = self.forward(xb, yb)
       self.optimizer.zero_grad(set_to_none=True)
       loss.backward()
       self.optimizer.step()
-      if step % 1000 == 0: print(loss.item())
+      if iter % eval_interval == 0:
+        losses = self.estimate_loss(train_data, val_data)
+        print(f"Step:{iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
 
   
 if __name__ == '__main__':
@@ -104,7 +125,7 @@ if __name__ == '__main__':
   
   logits, loss = model(xb, yb)
   print("---BEFORE TRAIN ---")
-  print(m.generate_text(max_new_toekns=400))
-  m.train(train_data)
+  print(model.generate_text(max_new_toekns=400))
+  model.trainModel(train_data, val_data)
   print("---AFTER TRAIN ---")
-  print(m.generate_text(max_new_toekns=400))
+  print(model.generate_text(max_new_toekns=400))
