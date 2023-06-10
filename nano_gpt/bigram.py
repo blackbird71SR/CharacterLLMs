@@ -5,7 +5,7 @@ import torch.nn.functional as F
 # hyperparameters
 batch_size = 32 # independent sequences to process in parallel
 block_size = 8  # maximum context length for predictions
-max_iters = 3000
+max_iters = 10000
 eval_interval = 300
 learning_rate = 1e-2
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -44,6 +44,7 @@ def getBatch(data):
   ix = torch.randint(len(data) - block_size, (batch_size, ))
   x = torch.stack([data[i:i+block_size] for i in ix]) # shape: ()
   y = torch.stack([data[i+1:i+block_size+1] for i in ix])
+  x, y = x.to(device), y.to(device)
   return x,y
 
 class BigramLM(nn.Module):
@@ -74,7 +75,7 @@ class BigramLM(nn.Module):
     return idx
   
   def generate_text(self, max_new_toekns=400):
-    idx = torch.zeros((1, 1), dtype=torch.long)
+    idx = torch.zeros((1, 1), dtype=torch.long, device=device)
     result_idx = self.generate(idx, max_new_toekns)
     return decode(result_idx[0].tolist())
   
@@ -97,8 +98,11 @@ if __name__ == '__main__':
   train_data, val_data = trainValSplit(data)
   
   xb, yb = getBatch(train_data)
-  m = BigramLM(vocab_size)
-  logits, loss = m(xb, yb)
+  
+  model = BigramLM(vocab_size)
+  m = model.to(device)
+  
+  logits, loss = model(xb, yb)
   print("---BEFORE TRAIN ---")
   print(m.generate_text(max_new_toekns=400))
   m.train(train_data)
