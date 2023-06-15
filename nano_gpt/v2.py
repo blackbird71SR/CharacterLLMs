@@ -54,11 +54,17 @@ class BigramLM(nn.Module):
   def __init__(self):
     super().__init__()
     self.token_embedding_table = nn.Embedding(vocab_size, n_embed)
+    self.positon_embedding_table = nn.Embedding(block_size, n_embed)
     self.lm_head = nn.Linear(n_embed, vocab_size)
 
   def forward(self, idx, targets=None):
+    B, T = idx.shape
+
+    # idx & targets are both (B,T) tensor
     tok_emb = self.token_embedding_table(idx) # (B,T,n_embed)
-    logits = self.lm_head(tok_emb) # (B,T,vocab_size)
+    pos_emb = self.positon_embedding_table(torch.arange(T, device=device)) # (T,n_embed)
+    x = tok_emb + pos_emb # (B,T,n_embed)
+    logits = self.lm_head(x) # (B,T,vocab_size)
 
     if targets is None:
       loss = None
