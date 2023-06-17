@@ -2,7 +2,7 @@
 
 ## Models
 
-1. [Bigram Model](models/bigram.py)
+1. [Bigram Model](makemore_models/bigram.py)
 ```
 Generated Examples: ['mor.', 'axx.', 'minaymoryles.', 'kondlaisah.', 'anchshizarie.', 'odaren.', 'iaddash.', 'h.', 'jhinatien.', 'egushl.']
 Training Loss: 2.4543561935424805
@@ -28,7 +28,7 @@ log_likelihood=tensor(-37.4303)
 nll=tensor(37.4303)
 normalized_nll=tensor(5.3472)
 ```
-1. [Neural Network Model - v1](models/nn_v1.py)
+1. [Neural Network Model - v1](makemore_models/nn_v1.py)
 ```
 Epoch 0: Loss 3.758953332901001
 Epoch 1: Loss 3.371100664138794
@@ -54,7 +54,7 @@ Generated Examples: ['moq.', 'axxaninaynnnykas.', 'kondn.', 'isah.', 'anchunizar
 Training Loss: 2.572789192199707
 Testing Loss: 3.002462387084961
 ```
-2. [Neural Network Model - v2](models/nn_v2.py)
+2. [Neural Network Model - v2](makemore_models/nn_v2.py)
 ```
 Total Parameters: 11897
       0/ 200000: 27.1911
@@ -81,7 +81,7 @@ Train Loss: 2.1259920597076416
 Val Loss: 2.1729347705841064
 Generated Examples: ['carpa.', 'zamilli.', 'khi.', 'miri.', 'thay.', 'skansh.', 'eja.', 'hube.', 'den.', 'rhe.', 'kaeli.', 'nerania.', 'chaiif.', 'kaleigh.', 'ham.', 'jorn.', 'quinn.', 'shous.', 'alian.', 'quis.']
 ```
-3. [Neural Network Model - v3](models/nn_v3.py)
+3. [Neural Network Model - v3](makemore_models/nn_v3.py)
 ```
 Total Parameters: 47551
       0/ 200000: 3.2870
@@ -108,7 +108,7 @@ Train Loss: 2.010877847671509
 Val Loss: 2.0822041034698486
 Generated Examples: ['tiavo.', 'deya.', 'brie.', 'araice.', 'isha.', 'roancayse.', 'emreidra.', 'hani.', 'tyleib.', 'chetcalyn.', 'kwistamarin.', 'mara.', 'sole.', 'diottari.', 'lacereaemi.', 'mico.', 'caymona.', 'zaki.', 'leonta.', 'pepp.']
 ```
-4. [Neural Network Model - v4](models/nn_v4.py)
+4. [Neural Network Model - v4](makemore_models/nn_v4.py)
 ```
 Total Parameters: 76579
       0/ 200000: 3.3089

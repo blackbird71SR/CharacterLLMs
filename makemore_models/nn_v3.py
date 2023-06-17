@@ -60,7 +60,7 @@ class Tanh:
   def parameters(self):
     return []
 
-def createWordsMapping(filename = 'names.txt'):
+def createWordsMapping(filename = '../data/names.txt'):
   words = open(filename, 'r').read().splitlines()
   chars = sorted(list(set(''.join(words))))
   stoi = {s:i+1 for i,s in enumerate(chars)}

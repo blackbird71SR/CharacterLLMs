@@ -112,7 +112,7 @@ class BigramLM(nn.Module):
 
   
 if __name__ == '__main__':
-  text = readData('input.txt')
+  text = readData('../data/input.txt')
   chars, vocab_size = createVocab(text)
   encode, decode = createCharMapping(chars)
   data = encodeData(text, encode)
