@@ -234,3 +234,37 @@ Clouts mult wigengd arne st is:
 CAnacew mas, ls mus thagh ispur and hasurt her wangs,
 thar
 ```
+
+4. [Multi-Head Attention](nanogpt_models/v4ss.py)
+```
+Step:0: train loss 4.1568, val loss 4.1620
+Step:500: train loss 2.6920, val loss 2.7108
+Step:1000: train loss 2.5332, val loss 2.5459
+Step:1500: train loss 2.4604, val loss 2.4584
+Step:2000: train loss 2.4009, val loss 2.4134
+Step:2500: train loss 2.3778, val loss 2.3767
+Step:3000: train loss 2.3540, val loss 2.3577
+Step:3500: train loss 2.3347, val loss 2.3381
+Step:4000: train loss 2.3026, val loss 2.3204
+Step:4500: train loss 2.2843, val loss 2.3198
+---AFTER TRAIN ---
+
+Sonst.
+
+The meth thor Iling, wepny gautn sin forns deve ase Rat.
+Naver your, te your, anres,
+aprakaith if meard.
+
+MI hill foulf doms de.
+
+
+San theriom. 'ING:
+Tuched, mall id!
+
+RGarwearf he to her!
+TULES:
+Yof sat bol' yil yourd
+Jould his nred oth lae you, ifecchyourdack, catwhesndo athot tay bust be in, I fir ull tay muttely to the ar't my:
+CArapew the west usht the is urrand has of her wands,
+thar
+```
