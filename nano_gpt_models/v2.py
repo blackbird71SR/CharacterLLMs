@@ -5,9 +5,9 @@ import torch.nn.functional as F
 # hyperparameters
 batch_size = 32 # independent sequences to process in parallel
 block_size = 8  # maximum context length for predictions
-max_iters = 10000
-eval_interval = 1000
-learning_rate = 1e-2
+max_iters = 5000
+eval_interval = 500
+learning_rate = 1e-3
 device = "cuda" if torch.cuda.is_available() else "cpu"
 eval_iters = 200
 n_embed = 32
@@ -80,6 +80,7 @@ class BigramLM(nn.Module):
     super().__init__()
     self.token_embedding_table = nn.Embedding(vocab_size, n_embed)
     self.positon_embedding_table = nn.Embedding(block_size, n_embed)
+    self.sa_head = Head(n_embed)
     self.lm_head = nn.Linear(n_embed, vocab_size)
 
   def forward(self, idx, targets=None):
@@ -89,6 +90,7 @@ class BigramLM(nn.Module):
     tok_emb = self.token_embedding_table(idx) # (B,T,n_embed)
     pos_emb = self.positon_embedding_table(torch.arange(T, device=device)) # (T,n_embed)
     x = tok_emb + pos_emb # (B,T,n_embed)
+    x = self.sa_head(x)
     logits = self.lm_head(x) # (B,T,vocab_size)
 
     if targets is None:
@@ -121,7 +123,8 @@ class BigramLM(nn.Module):
   def generate(self, idx, max_new_toekns):
     # idx is (B,T) array of indices in the current context
     for _ in range(max_new_toekns):
-      logits, loss = self(idx) # get predictions
+      idx_cond = idx[:, -block_size:] # crop index to last block_size tokens
+      logits, loss = self(idx_cond) # get predictions
       logits = logits[:,-1,:] # focus only on last time step, becomes (B,C)
       probs = F.softmax(logits, dim=1) # (B,C)
       idx_next = torch.multinomial(probs, num_samples=1) # (B,1)
@@ -147,7 +150,7 @@ class BigramLM(nn.Module):
 
   
 if __name__ == '__main__':
-  text = readData('../data/input.txt')
+  text = readData('data/input.txt')
   chars, vocab_size = createVocab(text)
   encode, decode = createCharMapping(chars)
   data = encodeData(text, encode)
