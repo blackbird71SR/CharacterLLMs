@@ -138,7 +138,7 @@ Generated Examples: ['dalyn.', 'ahnia.', 'sofer.', 'jubson.', 'jannie.', 'joss.'
 
 ## GPT Models
 
-1. [Bigram Model](nanogpt_models/bigram.py)
+1. [Bigram Model](nano_gpt_models/bigram.py)
 ```
 Step:0: train loss 4.7631, val loss 4.7663
 Step:1000: train loss 3.7780, val loss 3.7814
@@ -168,7 +168,7 @@ Y:
 Cl atounyowito me Sincevee tothinoodrdeapat tyee s, were!
 ```
 
-2. [Bigram + Position Encoding Model](nanogpt_models/v2.py)
+2. [Bigram + Position Encoding Model](nano_gpt_models/v2.py)
 ```
 Step:0: train loss 4.4878, val loss 4.5028
 Step:500: train loss 2.7204, val loss 2.7580
@@ -195,7 +195,7 @@ IZNCHINI Proiorby sirkeneres s derer Y:
 To t thid cest an.
 ```
 
-3. [Self-Attention Model](nanogpt_models/v3.py)
+3. [Self-Attention Model](nano_gpt_models/v3.py)
 ```
 Step:0: train loss 4.1879, val loss 4.1867
 Step:500: train loss 2.7170, val loss 2.7352
@@ -235,7 +235,7 @@ CAnacew mas, ls mus thagh ispur and hasurt her wangs,
 thar
 ```
 
-4. [Multi-Head Attention](nanogpt_models/v4ss.py)
+4. [Multi-Head Attention](nano_gpt_models/v4.py)
 ```
 Step:0: train loss 4.1568, val loss 4.1620
 Step:500: train loss 2.6920, val loss 2.7108
@@ -267,4 +267,32 @@ Yof sat bol' yil yourd
 Jould his nred oth lae you, ifecchyourdack, catwhesndo athot tay bust be in, I fir ull tay muttely to the ar't my:
 CArapew the west usht the is urrand has of her wands,
 thar
+```
+
+5. [Multi-Head Attention + Feed-Forward Block](nano_gpt_models/v5.py)
+```
+Step:0: train loss 4.2073, val loss 4.2089
+Step:500: train loss 2.6285, val loss 2.6394
+Step:1000: train loss 2.4731, val loss 2.4860
+Step:1500: train loss 2.4200, val loss 2.4231
+Step:2000: train loss 2.3568, val loss 2.3719
+Step:2500: train loss 2.3346, val loss 2.3381
+Step:3000: train loss 2.3135, val loss 2.3101
+Step:3500: train loss 2.2738, val loss 2.2850
+Step:4000: train loss 2.2472, val loss 2.2649
+Step:4500: train loss 2.2389, val loss 2.2819
+---AFTER TRAIN ---
+
+Therenttel? Gwinand eove the meforsotw, fick
+Dund thill durn? Loo? inge thy pas to icth rige deadre pre traint of docloow?
+
+Nod fre
+Sthe Boag's you cand as wimed.
+Huss Joce lo to the loue thursw have with youres.
+
+IU's Burd is pay uld prrist; suthav ous stome nille; to forw?
+MIMENSTETTENET:
+Wyour wind pem of prmemblefe yo, tre, My to jou thing, door and lit ain thad comevill. I'KH
+LUCIO:
+Now couly
 ```
