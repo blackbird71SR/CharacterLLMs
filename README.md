@@ -1,6 +1,6 @@
 # makemore
 
-## Models
+## Makemore Models
 
 1. [Bigram Model](makemore_models/bigram.py)
 ```
@@ -134,4 +134,103 @@ Total Parameters: 76579
 Train Loss: 1.7871284484863281
 Val Loss: 1.9913774728775024
 Generated Examples: ['dalyn.', 'ahnia.', 'sofer.', 'jubson.', 'jannie.', 'joss.', 'chanthin.', 'gerapton.', 'mariyael.', 'terry.', 'zyyan.', 'muzyah.', 'suirlyn.', 'branson.', 'reiner.', 'azan.', 'zyann.', 'kasnon.', 'flona.', 'ahavari.']
+```
+
+## GPT Models
+
+1. [Bigram Model](nanogpt_models/bigram.py)
+```
+Step:0: train loss 4.7631, val loss 4.7663
+Step:1000: train loss 3.7780, val loss 3.7814
+Step:2000: train loss 3.1664, val loss 3.1678
+Step:3000: train loss 2.8111, val loss 2.8360
+Step:4000: train loss 2.6556, val loss 2.6511
+Step:5000: train loss 2.5722, val loss 2.5797
+Step:6000: train loss 2.5195, val loss 2.5454
+Step:7000: train loss 2.4938, val loss 2.5129
+Step:8000: train loss 2.4908, val loss 2.5035
+Step:9000: train loss 2.4776, val loss 2.4917
+---AFTER TRAIN ---
+
+
+
+CENGHe' yrenen yoyowhes.
+ICESTENGS:
+Thy ceroothethy ou t kis ay:
+Ant!
+
+When h,Werdl be tof mee d om throoso-plar, lemy be y, d; h ked; mury Ahehitif o th bllican fougrd mavare ionglon strarsusf tesictims d iste, wixa.
+
+F h y tame dyogrin ICoowopedyn baveso melik foucr uecak's thave.'s me.
+ININNowiure pare r ad harel S:
+3cean'se Mor ct?
+Y:
+Cl atounyowito me Sincevee tothinoodrdeapat tyee s, were!
+```
+
+2. [Bigram + Position Encoding Model](nanogpt_models/v2.py)
+```
+Step:0: train loss 4.4878, val loss 4.5028
+Step:500: train loss 2.7204, val loss 2.7580
+Step:1000: train loss 2.5810, val loss 2.6155
+Step:1500: train loss 2.5372, val loss 2.5599
+Step:2000: train loss 2.5048, val loss 2.5374
+Step:2500: train loss 2.4937, val loss 2.5196
+Step:3000: train loss 2.4969, val loss 2.5252
+Step:3500: train loss 2.5022, val loss 2.5150
+Step:4000: train loss 2.4834, val loss 2.5028
+Step:4500: train loss 2.4888, val loss 2.5143
+---AFTER TRAIN ---
+
+DEOna youm ble r l oulither k,
+OLAMINouy w hel challouthilerrs Pror wos emes as h'dr,
+NI it y mawand.
+G
+'st tele bichinobur we t bo y ber bly, s appay
+BELOUKBupe k't d y ING thiss, any ttithe ssste ce, oreal fr-wereaneeatee
+Whist yente wis fas. copicy th, bcir iter tind udesced se ESoathe chie
+Tiothin st ntr'de Cobler whay iote IUCavot g,
+IZNCHINI Proiorby sirkeneres s derer Y:
+
+To t thid cest an.
+```
+
+3. [Self-Attention Model](nanogpt_models/v3.py)
+```
+Step:0: train loss 4.1879, val loss 4.1867
+Step:500: train loss 2.7170, val loss 2.7352
+Step:1000: train loss 2.5219, val loss 2.5336
+Step:1500: train loss 2.4756, val loss 2.4774
+Step:2000: train loss 2.4354, val loss 2.4568
+Step:2500: train loss 2.4321, val loss 2.4397
+Step:3000: train loss 2.4227, val loss 2.4367
+Step:3500: train loss 2.4169, val loss 2.4313
+Step:4000: train loss 2.4018, val loss 2.4260
+Step:4500: train loss 2.3951, val loss 2.4336
+---AFTER TRAIN ---
+
+Sonst.
+
+The myo maly.
+
+
+
+I''d spor owutn sew fed sp ste atl Rat.
+NCoughe,
+Fhete your, adr sehapr?
+
+WINO: his I:
+NE:
+AR AUS:
+ARLUKORA des elyan thetiorove, rdis cred, my, kid!
+
+RGarwearf hes mye mye st hane. Yot.
+
+Hak yill tet,
+JI Roun
+Wheret ot slle the, irwconcok orck, ca, hesndo athoty an bee, bes a, bes.
+
+Clouts mult wigengd arne st is:
+CAnacew mas, ls mus thagh ispur and hasurt her wangs,
+thar
 ```
