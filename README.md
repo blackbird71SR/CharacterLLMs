@@ -296,3 +296,29 @@ Wyour wind pem of prmemblefe yo, tre, My to jou thing, door and lit ain thad com
 LUCIO:
 Now couly
 ```
+
+6. [Residual Connection with Transformer Blocks](nano_gpt_models/v6.py)
+```
+Step:0: train loss 4.4304, val loss 4.4418
+Step:500: train loss 2.3703, val loss 2.3839
+Step:1000: train loss 2.2673, val loss 2.2893
+Step:1500: train loss 2.1940, val loss 2.2164
+Step:2000: train loss 2.1318, val loss 2.1828
+Step:2500: train loss 2.1246, val loss 2.1494
+Step:3000: train loss 2.0942, val loss 2.1401
+Step:3500: train loss 2.0634, val loss 2.1253
+Step:4000: train loss 2.0292, val loss 2.1276
+Step:4500: train loss 2.0239, val loss 2.1092
+---AFTER TRAIN ---
+
+AUCESS
+EO:
+But speers; and bamigh havions guer'ot bear, my face
+Aike; his have well dearge, if of the dice, thangock:
+Whow mhas of see nate, To mas he make of far, are;
+Bedore be's bricege colbels may his the slay:
+I his sone. lige macke as suranst birt to fay'd but they canso gravity high this daies and his his my thus my, and hose him: guck: from I note a fors spity so anjoy foreis.
+
+NORIES:
+The
+```
