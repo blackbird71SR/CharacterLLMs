@@ -380,3 +380,34 @@ CFODWAUMIULAELLINGBEY:
 Doot:
 I mothin
 ```
+
+8. [Final Scaled Up Model with Dropout](nano_gpt_models/v8.py)
+```
+Step:0: train loss 3.7739, val loss 3.7982
+Step:500: train loss 2.1179, val loss 2.1695
+Step:1000: train loss 1.7477, val loss 1.8905
+Step:1500: train loss 1.5818, val loss 1.7615
+Step:2000: train loss 1.4896, val loss 1.6917
+Step:2500: train loss 1.4325, val loss 1.6386
+Step:3000: train loss 1.3980, val loss 1.6180
+Step:3500: train loss 1.3625, val loss 1.5847
+Step:4000: train loss 1.3393, val loss 1.5582
+Step:4500: train loss 1.3204, val loss 1.5584
+---AFTER TRAIN ---
+
+My son;
+Pohting and you alace, recable couttsbuckman by yet,
+with those of his earth is dead arried,
+His distremess on.
+
+LEONTES:
+Day thy my lord.
+
+PATEY:
+Well, when, my lords, be resolum!
+What havens heard! Our proud afford!
+'Tis he he teask he will?' the high no common.
+3 Good Clifff offershion! But see-bliam,
+Here us not hide, cring to the bloody Marcious stay
+to have augguil unter from swift t
+```
