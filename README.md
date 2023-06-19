@@ -1,6 +1,33 @@
-# makemore
+# Character Level Large Language Models
+
+Following "Neural Networks: Zero to Hero" by Andrej Kapathy ([@karpathy](https://github.com/karpathy))
+
+- [YouTube Tutorial](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ)
+- GitHub Repositories:
+  - [makemore](https://github.com/karpathy/makemore)
+  - [nanoGPT](https://github.com/karpathy/nanoGPT)
+
+![Transformer Architecture](data/Transformer.png)
+From: [Attention Is All You Need
+](https://arxiv.org/abs/1706.03762)
+
+## Implmentations From...
+
+- MLP, following [Bengio et al. 2003](https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf)
+- CNN, following [DeepMind WaveNet 2016](https://arxiv.org/abs/1609.03499) (in progress...)
+- RNN, following [Mikolov et al. 2010](https://www.fit.vutbr.cz/research/groups/speech/publi/2010/mikolov_interspeech2010_IS100722.pdf)
+- LSTM, following [Graves et al. 2014](https://arxiv.org/abs/1308.0850)
+- GRU, following [Kyunghyun Cho et al. 2014](https://arxiv.org/abs/1409.1259)
+- Transformer, following [Vaswani et al. 2017](https://arxiv.org/abs/1706.03762)
+
 
 ## Makemore Models
+
+> **An autoregressive character-level language models**
+
+- Takes one text file as input, where each line is assumed to be one training thing, and generates more things like it.
+- In this case, [data](data/names.txt) is a database of names & models generate cool new names!
+
 
 1. [Bigram Model](makemore_models/bigram.py)
 ```
@@ -54,7 +81,7 @@ Generated Examples: ['moq.', 'axxaninaynnnykas.', 'kondn.', 'isah.', 'anchunizar
 Training Loss: 2.572789192199707
 Testing Loss: 3.002462387084961
 ```
-2. [Neural Network Model - v2](makemore_models/nn_v2.py)
+1. [Neural Network Model - v2](makemore_models/nn_v2.py)
 ```
 Total Parameters: 11897
       0/ 200000: 27.1911
@@ -81,7 +108,7 @@ Train Loss: 2.1259920597076416
 Val Loss: 2.1729347705841064
 Generated Examples: ['carpa.', 'zamilli.', 'khi.', 'miri.', 'thay.', 'skansh.', 'eja.', 'hube.', 'den.', 'rhe.', 'kaeli.', 'nerania.', 'chaiif.', 'kaleigh.', 'ham.', 'jorn.', 'quinn.', 'shous.', 'alian.', 'quis.']
 ```
-3. [Neural Network Model - v3](makemore_models/nn_v3.py)
+1. [Neural Network Model - v3](makemore_models/nn_v3.py)
 ```
 Total Parameters: 47551
       0/ 200000: 3.2870
@@ -108,7 +135,7 @@ Train Loss: 2.010877847671509
 Val Loss: 2.0822041034698486
 Generated Examples: ['tiavo.', 'deya.', 'brie.', 'araice.', 'isha.', 'roancayse.', 'emreidra.', 'hani.', 'tyleib.', 'chetcalyn.', 'kwistamarin.', 'mara.', 'sole.', 'diottari.', 'lacereaemi.', 'mico.', 'caymona.', 'zaki.', 'leonta.', 'pepp.']
 ```
-4. [Neural Network Model - v4](makemore_models/nn_v4.py)
+1. [Neural Network Model - v4](makemore_models/nn_v4.py)
 ```
 Total Parameters: 76579
       0/ 200000: 3.3089
@@ -136,7 +163,11 @@ Val Loss: 1.9913774728775024
 Generated Examples: ['dalyn.', 'ahnia.', 'sofer.', 'jubson.', 'jannie.', 'joss.', 'chanthin.', 'gerapton.', 'mariyael.', 'terry.', 'zyyan.', 'muzyah.', 'suirlyn.', 'branson.', 'reiner.', 'azan.', 'zyann.', 'kasnon.', 'flona.', 'ahavari.']
 ```
 
-## GPT Models
+## Nano-GPT Models
+
+> **Medium-sized Decoder-Only Transformer based GPT**
+
+Trained on [Shakespeare text](data/input.txt), to genreate new text similar to it!
 
 1. [Bigram Model](nano_gpt_models/bigram.py)
 ```
