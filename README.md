@@ -322,3 +322,30 @@ I his sone. lige macke as suranst birt to fay'd but they canso gravity high this
 NORIES:
 The
 ```
+
+7. [Residual Connection with Transformer Blocks + LayerNorm](nano_gpt_models/v7.py)
+```
+Step:0: train loss 4.2909, val loss 4.2965
+Step:500: train loss 2.3991, val loss 2.4100
+Step:1000: train loss 2.2732, val loss 2.2994
+Step:1500: train loss 2.1887, val loss 2.2112
+Step:2000: train loss 2.1322, val loss 2.1774
+Step:2500: train loss 2.1207, val loss 2.1350
+Step:3000: train loss 2.0789, val loss 2.1235
+Step:3500: train loss 2.0471, val loss 2.1094
+Step:4000: train loss 2.0164, val loss 2.1017
+Step:4500: train loss 2.0128, val loss 2.0910
+---AFTER TRAIN ---
+
+AUCESCEEO:
+But sagers'd me batightherions I magot bear ful face oing; him, may well dear cold book this cust and of If they have is then
+I wreas.
+
+VOLOXEN
+Fort, have restedor would brichus colbere may his the rake:
+Come. O heath no mage, as shranis biet res, my sour they canso gravaty high this daies and his hill Hothus my, and the hath: ghave frive the evay.
+
+CFODWAUMIULAELLINGBEY:
+Doot:
+I mothin
+```
