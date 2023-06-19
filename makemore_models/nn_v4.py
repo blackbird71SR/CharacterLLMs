@@ -107,7 +107,7 @@ class Sequential:
   def parameters(self):
     return [p for layer in self.layers for p in layer.parameters()]
 
-def createWordsMapping(filename = '../data/names.txt'):
+def createWordsMapping(filename = 'data/names.txt'):
   words = open(filename, 'r').read().splitlines()
   chars = sorted(list(set(''.join(words))))
   stoi = {s:i+1 for i,s in enumerate(chars)}
